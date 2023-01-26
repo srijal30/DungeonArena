@@ -25,41 +25,53 @@ rect_min_size = Vector2( 500, 0 )
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 160.0
+margin_top = 6.0
 margin_right = 500.0
-margin_bottom = 189.0
+margin_bottom = 35.0
 theme = ExtResource( 1 )
 text = "DUNGEON RPG"
 align = 1
 
 [node name="Host" type="Button" parent="VBoxContainer"]
-margin_top = 193.0
+margin_top = 39.0
 margin_right = 500.0
-margin_bottom = 243.0
+margin_bottom = 89.0
 rect_min_size = Vector2( 100, 50 )
 theme = ExtResource( 1 )
 text = "Host"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 247.0
+margin_top = 93.0
 margin_right = 500.0
-margin_bottom = 347.0
-rect_min_size = Vector2( 0, 100 )
+margin_bottom = 163.0
+rect_min_size = Vector2( 0, 70 )
 
-[node name="InputIP" type="LineEdit" parent="VBoxContainer"]
-margin_top = 351.0
+[node name="InputUsername" type="LineEdit" parent="VBoxContainer"]
+margin_top = 167.0
 margin_right = 500.0
-margin_bottom = 385.0
+margin_bottom = 201.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 1 )
 custom_fonts/font = SubResource( 1 )
 align = 1
+placeholder_text = "Username"
+
+[node name="InputIP" type="LineEdit" parent="VBoxContainer"]
+margin_top = 205.0
+margin_right = 500.0
+margin_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+align = 1
+placeholder_text = "IP Address"
 
 [node name="Join" type="Button" parent="VBoxContainer"]
-margin_top = 389.0
+margin_top = 243.0
 margin_right = 500.0
-margin_bottom = 439.0
+margin_bottom = 293.0
 rect_min_size = Vector2( 100, 50 )
 theme = ExtResource( 1 )
 text = "Join"

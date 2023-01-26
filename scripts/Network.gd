@@ -1,5 +1,8 @@
 extends Node
 
+var PORT : int = 58008
+var MAX_PLAYERS : int = 10
+
 func _ready():
 	# connect the networking signals
 	# server & client
@@ -11,18 +14,41 @@ func _ready():
 	get_tree().connect("connection_failed", self, "_connection_failed")
 
 
+func create_server() -> void:
+	var peer = NetworkedMultiplayerENet.new()
+	peer.create_server(PORT, MAX_PLAYERS)
+	get_tree().network_peer = peer
+
+
+func create_client(ip: String) -> void:
+	var peer = NetworkedMultiplayerENet.new()
+	peer.create_client(ip, PORT)
+	get_tree().network_peer = peer
+
+# UNIQUE SERVER FUNCTIONALITY
+# ...
+
+# SIGNALS
 func _peer_connected(id: int) -> void:
-	pass
-		
+	print("peer with id: " + str(id) + " connected")
+	if id != 1:
+		PlayerManager.create_player(id)
+
 func _peer_disconnected(id: int) -> void:
-	pass
+	# STUB: remove the player
+	print("peer with id: " + str(id) + " disconnected")
+	if id != 1:
+		PlayerManager.remove_player(id)
 
 func _connected_to_server() -> void:
-	pass
+	print("connected to the server!")
+	# STUB: create the player for yourself
+	PlayerManager.create_player(get_tree().get_network_unique_id())
 
 func _connection_failed() -> void:
-	pass
+	# STUB: return to lobby & error message
+	print("connection attempt to server failed!")
 
 func _server_disconnected() -> void:
-	pass
-
+	# STUB: return to lobby
+	print("disconnected from the server!")

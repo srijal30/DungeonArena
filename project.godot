@@ -18,9 +18,12 @@ config/icon="res://icon.png"
 [autoload]
 
 Network="*res://scripts/Network.gd"
+PlayerManager="*res://scripts/PlayerManager.gd"
 
 [display]
 
+window/size/width=512
+window/size/height=300
 window/description=""
 
 [global]
