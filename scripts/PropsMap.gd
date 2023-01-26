@@ -9,7 +9,6 @@ export(Dictionary) var TILE_SCENES := {
 
 onready var half_cell_size := cell_size * 0.5
 
-
 func _ready():
 	yield(get_tree(), "idle_frame")
 	_replace_tiles_with_scenes()
