@@ -14,45 +14,44 @@ func _ready():
 	get_tree().connect("connection_failed", self, "_connection_failed")
 
 
+# UNIQUE SERVER FUNCTIONALITY
+# ...
+
+
 func create_server() -> void:
+	print("server created")
 	var peer = NetworkedMultiplayerENet.new()
 	peer.create_server(PORT, MAX_PLAYERS)
 	get_tree().network_peer = peer
 	# STUB: start the game
-	var test_level_scene = preload("res://scenes/levels/Test.tscn")
-	var test_level = test_level_scene.instance()
-	get_node("/root/Main/Game").add_child(test_level)
+	GameManager.create_level()
 
 
 func create_client(ip: String) -> void:
+	print("client created")
 	var peer = NetworkedMultiplayerENet.new()
 	peer.create_client(ip, PORT)
 	get_tree().network_peer = peer
 	# STUB: start the game
-	var test_level_scene = preload("res://scenes/levels/Test.tscn")
-	var test_level = test_level_scene.instance()
-	get_node("/root/Main/Game").add_child(test_level)
-	
+	GameManager.create_level()
 
-# UNIQUE SERVER FUNCTIONALITY
-# ...
 
 # SIGNALS
 func _peer_connected(id: int) -> void:
 	print("peer with id: " + str(id) + " connected")
 	if id != 1:
-		PlayerManager.create_player(id)
+		GameManager.create_player(id)
 
 func _peer_disconnected(id: int) -> void:
 	# STUB: remove the player
 	print("peer with id: " + str(id) + " disconnected")
 	if id != 1:
-		PlayerManager.remove_player(id)
+		GameManager.remove_player(id)
 
 func _connected_to_server() -> void:
 	print("connected to the server!")
 	# STUB: create the player for yourself
-	PlayerManager.create_player(get_tree().get_network_unique_id())
+	GameManager.create_player(get_tree().get_network_unique_id())
 
 func _connection_failed() -> void:
 	# STUB: return to lobby & error message

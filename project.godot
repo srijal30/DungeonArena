@@ -12,18 +12,20 @@ config_version=4
 
 config/name="RPG"
 config/description="Multipler RPG"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/UI.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Network="*res://scripts/Network.gd"
-PlayerManager="*res://scripts/PlayerManager.gd"
+GameManager="*res://scripts/GameManager.gd"
 
 [display]
 
 window/size/width=512
 window/size/height=300
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 window/description=""
 
 [global]

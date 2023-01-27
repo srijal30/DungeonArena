@@ -5,6 +5,7 @@ extends TileMap
 # This way, by referring to TILE_SCENES with a certain ID we will receive this tile's
 # individual scene
 export(Dictionary) var TILE_SCENES := {
+	5: preload("res://scenes/objects/Spikes.tscn")
 }
 
 onready var half_cell_size := cell_size * 0.5
