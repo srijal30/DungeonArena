@@ -5,7 +5,7 @@
 PVP arena based in a dungeon where multiple players across devices can join and fight to increase their rank on the leaderboard (which is based off kills)
 
 ## Creators
-* [Salaj Rijal](https://github.com/srijal30/student-help-hub/commits?author=srijal30)
+* [Salaj Rijal](https://github.com/srijal30)
 
 ## Planned Features
 * Combos and dash abilites for player
