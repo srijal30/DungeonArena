@@ -18,12 +18,21 @@ func create_server() -> void:
 	var peer = NetworkedMultiplayerENet.new()
 	peer.create_server(PORT, MAX_PLAYERS)
 	get_tree().network_peer = peer
+	# STUB: start the game
+	var test_level_scene = preload("res://scenes/levels/Test.tscn")
+	var test_level = test_level_scene.instance()
+	get_node("/root/Main/Game").add_child(test_level)
 
 
 func create_client(ip: String) -> void:
 	var peer = NetworkedMultiplayerENet.new()
 	peer.create_client(ip, PORT)
 	get_tree().network_peer = peer
+	# STUB: start the game
+	var test_level_scene = preload("res://scenes/levels/Test.tscn")
+	var test_level = test_level_scene.instance()
+	get_node("/root/Main/Game").add_child(test_level)
+	
 
 # UNIQUE SERVER FUNCTIONALITY
 # ...
