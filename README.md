@@ -14,3 +14,6 @@ PVP arena based in a dungeon where multiple players across devices can join and 
 * Randomly generated loot all over the map
 * Interactable map w/ levers and buttons
 
+# Credits
+* [0x72](https://0x72.itch.io/) for the assets
+* [struhy_xd](https://itch.io/profile/struhy-xd) for the dungeon wall assets
