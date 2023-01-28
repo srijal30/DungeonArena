@@ -25,6 +25,6 @@ Then, open the godot editor and then import the repository's `project.godot`. Se
 * Randomly generated loot all over the map
 * Interactable map w/ levers and buttons
 
-# Credits
+## Credits
 * [0x72](https://0x72.itch.io/) for the assets
 * [struhy_xd](https://itch.io/profile/struhy-xd) for the dungeon wall assets
