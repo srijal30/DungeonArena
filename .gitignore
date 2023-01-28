@@ -1,6 +1,7 @@
 # Enviorment Specific
 .vscode/
 *.swap
+test
 
 # Godot 4+ specific ignores
 .godot/
