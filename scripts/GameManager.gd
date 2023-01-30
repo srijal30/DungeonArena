@@ -4,7 +4,6 @@ extends Node2D
 var players: Array = []
 var PlayerScene = preload("res://scenes/player/Player.tscn")
 
-
 # GAME STUFF
 var TestScene = preload("res://scenes/levels/Test.tscn")
 
@@ -15,17 +14,29 @@ func create_level():
 
 
 func remove_player(id: int):
+	# STUB: remove the player
 	players.erase(id)
-	# IDK IF THIS WILL WORK?
-	get_node(str(id)).queue_free() 	# STUB: remove the child node
+	get_node(str(id)).queue_free()
+	
+	#STUB: return to lobby if we disconnected
 	if get_tree().get_network_unique_id() == id:
-		#STUB: return to lobby
 		pass
 
 
-func create_player(id: int):
+remotesync func create_player(id: int, username: String):
+	# create the new player
 	players.append(id)
 	var new_player = PlayerScene.instance()
 	new_player.set_name(str(id))
-	new_player.set_network_master(id) # this should automatically set master properly?
+	new_player.set_network_master(id)
+	
+	# setup the player info
+	new_player.set_username(username)
+	
+	# connect HUD if master
+	if id == get_tree().get_network_unique_id():
+		PlayerInfo.player = new_player
+		PlayerInfo.start()
+	
+	# create the player
 	add_child(new_player)

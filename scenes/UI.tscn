@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/UI.gd" type="Script" id=1]
-[ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=2]
-[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/ui/Roboto.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/assets/ui/ui_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/assets/ui/Roboto.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -73,8 +72,6 @@ margin_bottom = 293.0
 rect_min_size = Vector2( 100, 50 )
 theme = ExtResource( 2 )
 text = "Join"
-
-[node name="HUD" parent="." instance=ExtResource( 3 )]
 
 [connection signal="button_up" from="Lobby/Host" to="." method="_on_Host_button_up"]
 [connection signal="button_up" from="Lobby/Join" to="." method="_on_Join_button_up"]

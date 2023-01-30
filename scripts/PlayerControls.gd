@@ -5,11 +5,12 @@ var speed = 8000
 puppet var velocity = Vector2.ZERO
 puppet var pposition = Vector2.ZERO setget set_pposition
 
+func set_username(name: String):
+	$Username/Label.text = name
+
 func _ready():
 	if is_network_master():
-		$Username/Label.text = "You"
 		$PlayerCamera.current = true
-		#STUB: connect HUD
 
 func _physics_process(delta):
 	if is_network_master():
@@ -28,7 +29,7 @@ func do_animation():
 	elif velocity.x < 0:
 		$AnimatedSprite.play("run")
 		$AnimatedSprite.flip_h = true
-		
+
 # smoothly updates position
 func set_pposition(pos):
 	pposition = pos
@@ -40,7 +41,7 @@ func _on_SyncTimer_timeout():
 	if is_network_master():
 		rset_unreliable("pposition", position)
 		rset_unreliable("velocity", velocity)
-		
+
 func take_damage(dmg: int):
 	if is_network_master():
 		print("taken " + str(dmg) + " damage")

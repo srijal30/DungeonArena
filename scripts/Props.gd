@@ -22,7 +22,7 @@ func _replace_tiles_with_scenes(scene_dictionary: Dictionary = TILE_SCENES):
 			var object_scene = scene_dictionary[tile_id]
 			_replace_tile_with_object(tile_pos, object_scene)
 
-func _replace_tile_with_object(tile_pos: Vector2, object_scene: PackedScene, parent: Node = get_tree().current_scene):
+func _replace_tile_with_object(tile_pos: Vector2, object_scene: PackedScene, parent: Node = get_parent()):
 	# Clear the cell in TileMap
 	if get_cellv(tile_pos) != INVALID_CELL:
 		set_cellv(tile_pos, -1)
