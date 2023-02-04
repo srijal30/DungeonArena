@@ -1,0 +1,49 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=2]
+
+[sub_resource type="StreamTexture" id=58]
+load_path = "res://.import/dungeon_tiles.png-62b6729de370705253def7f0cad774fc.stex"
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = SubResource( 58 )
+region = Rect2( 64, 176, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = SubResource( 58 )
+region = Rect2( 48, 176, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = SubResource( 58 )
+region = Rect2( 32, 176, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = SubResource( 58 )
+region = Rect2( 16, 176, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = SubResource( 58 )
+region = Rect2( 16, 176, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = SubResource( 58 )
+region = Rect2( 32, 176, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = SubResource( 58 )
+region = Rect2( 48, 176, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = SubResource( 58 )
+region = Rect2( 64, 176, 16, 16 )
+
+[resource]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": false,
+"name": "off",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": false,
+"name": "on",
+"speed": 10.0
+} ]
