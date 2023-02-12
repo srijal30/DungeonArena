@@ -1,10 +1,15 @@
+"""
+TO DO:
+	- Lag Compensation (by sending velocity)
+	
+"""
+
 # DOES ANIMATION AND PLAYER MOVEMENT
 extends KinematicBody2D
 
 
-# constants
 var speed = 8000
-# GameManager should have global constants for all players
+onready var player_info = $PlayerInfo
 
 puppet var velocity = Vector2.ZERO
 puppet var pposition = Vector2.ZERO setget set_pposition

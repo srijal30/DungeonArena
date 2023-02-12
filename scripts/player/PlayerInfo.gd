@@ -31,4 +31,5 @@ func set_username(name: String):
 
 
 # NETWORK FUNCTIONS
-
+remotesync func modify_health(hearts: float) -> void:
+	currentHearts = clamp(currentHearts + hearts, 0, maxHearts)
