@@ -28,5 +28,5 @@ puppetsync func attack():
 
 # ONLY NETWORK MASTER COMMITS THE DAMAGE	
 func _on_Hitbox_body_entered(body):
-	if body.is_in_group("character") and is_network_master() and body != parent:
-		body.info.rpc("modify_health", -weapon_damage)
+	if body.is_in_group("character") and is_network_master() and body != parent and attacking:
+		body.info.rpc("modify_health", -weapon_damage, position)

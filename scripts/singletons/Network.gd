@@ -16,7 +16,8 @@ func _ready():
 
 # UNIQUE SERVER FUNCTIONALITY
 # ...
-
+# TO DO:
+# ADD A FUNCTION THAT SYNCS ALL CLIENTS WHEN THEY JOIN
 
 func create_server() -> void:
 	print("server created")

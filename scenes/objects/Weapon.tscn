@@ -6,62 +6,14 @@
 [sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Hitbox/Sprite:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Hitbox:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hitbox:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "slash"
-length = 0.5
-tracks/0/type = "bezier"
 tracks/0/path = NodePath("Hitbox:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.0985323, 23.9464, 122.842, -0.25, 0, 0.11241, -60.1975, 0, -0.25, 0, 0.00555113, 25.7989 ),
-"times": PoolRealArray( 0.01249, 0.2, 0.452416 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Hitbox:visible")
@@ -70,28 +22,41 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.00138778, 0.5 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "slash"
+length = 0.35
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Hitbox:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 2.5, -0.25, 0, 0.0588891, -100, 126.5, -0.115218, -21, 0.11241, -60.1975, 0, -0.116292, -0.5, 0.00555113, 25.7989 ),
+"times": PoolRealArray( 0.0396861, 0.330931, 0.339046 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hitbox:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.00138778, 0.33058 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hitbox/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
 }
 
 [sub_resource type="CapsuleShape2D" id=2]
 
 [node name="Weapon" type="Node2D"]
-z_index = 1
 z_as_relative = false
 script = ExtResource( 2 )
 
@@ -103,11 +68,12 @@ anims/slash = SubResource( 3 )
 visible = false
 
 [node name="Sprite" type="Sprite" parent="Hitbox"]
+position = Vector2( 0, 7 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, -14 )
+offset = Vector2( 0, -24 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( 0, -16 )
+position = Vector2( 0, -18 )
 scale = Vector2( 0.370424, 0.421663 )
 shape = SubResource( 2 )
 
