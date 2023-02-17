@@ -1,6 +1,6 @@
 extends Node
 
-var PORT : int = 58008
+var PORT : int = 55555 # 58008
 var MAX_PLAYERS : int = 10
 var username: String
 

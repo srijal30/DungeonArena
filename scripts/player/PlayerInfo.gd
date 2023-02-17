@@ -38,9 +38,10 @@ func set_username(name: String):
 
 # NETWORK FUNCTIONS
 remotesync func modify_health(hearts: float, src_pos) -> void:
+	# check if damage is being done
 	if hearts < 0:
 		flash()
+		# check if knockback should be applied
+		if src_pos != null:
+			get_parent().knockback(src_pos)	
 	currentHearts = clamp(currentHearts + hearts, 0, maxHearts)
-	# check if knockback should be applied
-	if src_pos != null:
-		get_parent().knockback(src_pos)

@@ -62,9 +62,7 @@ func dash():
 # STUB: test this
 # not sure if this works
 func knockback(src_pos):
-	var angle = position.angle_to(src_pos)
-	print(rad2deg(angle))
-	velocity = Vector2(cos(angle), sin(angle)) * knockback_strength
+	velocity = Vector2(src_pos.x-position.x, src_pos.y-position.y).normalized() * -knockback_strength
 
 func do_animation():
 	# determine orientation
