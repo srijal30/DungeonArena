@@ -25,6 +25,7 @@ custom_fonts/font = SubResource( 1 )
 text = "FPS: "
 
 [node name="HeartsBackground" type="TextureRect" parent="."]
+visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 7.0
@@ -36,6 +37,7 @@ texture = ExtResource( 5 )
 stretch_mode = 2
 
 [node name="Hearts" type="TextureRect" parent="."]
+visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 7.0
@@ -45,3 +47,46 @@ margin_bottom = -14.0
 rect_scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 stretch_mode = 2
+
+[node name="DeathTimer" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="DeathTimer"]
+one_shot = true
+
+[node name="TimeLeft" type="Label" parent="DeathTimer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -14.5
+margin_right = 20.0
+margin_bottom = 14.5
+text = "5.0"
+align = 1
+valign = 1
+
+[node name="YouDied" type="Label" parent="DeathTimer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -43.0
+margin_top = -50.0
+margin_right = 43.0
+margin_bottom = -21.0
+text = "YOU DIED"
+align = 1
+valign = 1
+
+[node name="ColorRect" type="ColorRect" parent="DeathTimer"]
+modulate = Color( 0.623529, 0, 0, 0.282353 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.952941, 0.0196078, 0.0196078, 1 )
+
+[connection signal="timeout" from="DeathTimer/Timer" to="." method="_on_Timer_timeout"]

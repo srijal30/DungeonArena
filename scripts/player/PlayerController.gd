@@ -16,7 +16,7 @@ var friction = .3
 var dash_multiplier = 3.5
 var dash_frames = 0
 var dash_delay = 0.4
-var can_dash = true
+puppetsync var can_dash = true
 
 onready var info = $PlayerInfo
 
@@ -55,9 +55,9 @@ func dash():
 	velocity.x = clamp(velocity.x, -speed*dash_multiplier, speed*dash_multiplier)
 	velocity.y = clamp(velocity.y, -speed*dash_multiplier, speed*dash_multiplier)
 	# experimenting with dash delay
-	can_dash = false
+	rset("can_dash", false)
 	yield(get_tree().create_timer(dash_delay), "timeout")
-	can_dash = true
+	rset("can_dash", true)
 	
 # STUB: test this
 # not sure if this works
@@ -79,7 +79,6 @@ func do_animation():
 	else:
 		$AnimatedSprite.play("run")
 		
-	
 # NETWORK STUFF
 func set_pposition(pos):
 	pposition = pos

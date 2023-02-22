@@ -23,11 +23,17 @@ puppetsync func point_to(pos):
 puppetsync func attack():
 	attacking = true
 	$AnimationPlayer.play("slash")
+	
+	# MAKE THIS MORE GENERAL (NOT JUST FOR PLAYERS
+	var bodies = $Hitbox.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("player") and is_network_master():
+			body.info.rpc("modify_health", -weapon_damage, position)
+			
 	yield($AnimationPlayer, "animation_finished")
 	attacking = false
 
 # ONLY NETWORK MASTER COMMITS THE DAMAGE	
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("character") and is_network_master() and body != parent and attacking:
-		print("weapon pos: ", position)
 		body.info.rpc("modify_health", -weapon_damage, get_parent().position)

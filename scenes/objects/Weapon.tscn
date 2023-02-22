@@ -30,7 +30,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "slash"
-length = 0.35
+length = 0.25
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Hitbox:rotation_degrees")
 tracks/0/interp = 1
@@ -38,8 +38,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 2.5, -0.25, 0, 0.0588891, -100, 126.5, -0.115218, -21, 0.11241, -60.1975, 0, -0.116292, -0.5, 0.00555113, 25.7989 ),
-"times": PoolRealArray( 0.0396861, 0.330931, 0.339046 )
+"points": PoolRealArray( 0, -0.25, 0, 0.0603139, -5, 97.3564, -0.25, 0, 0.25, 0, 0, -0.116292, -0.5, 0.00555113, 25.7989 ),
+"times": PoolRealArray( 0.0396861, 0.231753, 0.244436 )
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Hitbox:visible")
@@ -48,7 +48,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.00138778, 0.33058 ),
+"times": PoolRealArray( 0.00138778, 0.247759 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]

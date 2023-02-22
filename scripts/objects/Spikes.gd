@@ -19,6 +19,12 @@ func _ready():
 puppetsync func turn_on():
 	cur_state = state.ON
 	$AnimatedSprite.play("on")
+	
+	# MAKE THIS MORE GENERAL (NOT JUST FOR PLAYERS
+	var bodies = $Hitbox.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("player") and is_network_master():
+			body.info.rpc("modify_health", -spike_damage, position)
 
 puppetsync func turn_off():
 	cur_state = state.OFF
