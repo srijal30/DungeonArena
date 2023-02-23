@@ -43,6 +43,7 @@ theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 2 )
 text = "Player"
 align = 1
+percent_visible = 2.0
 
 [node name="HealthBar" type="Control" parent="PlayerInfo"]
 margin_top = 2.0

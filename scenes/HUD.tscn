@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=2]
 [ext_resource path="res://assets/ui/Solitreo-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/items/full_heart.png" type="Texture" id=4]
 [ext_resource path="res://assets/items/no_heart.png" type="Texture" id=5]
+[ext_resource path="res://scenes/Leaderboard.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -88,5 +89,13 @@ modulate = Color( 0.623529, 0, 0, 0.282353 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.952941, 0.0196078, 0.0196078, 1 )
+
+[node name="Leaderboard" parent="." instance=ExtResource( 6 )]
+anchor_left = 1.0
+anchor_bottom = 0.0
+margin_left = -60.0
+margin_top = 7.0
+margin_right = -5.0
+margin_bottom = 83.0
 
 [connection signal="timeout" from="DeathTimer/Timer" to="." method="_on_Timer_timeout"]

@@ -24,7 +24,7 @@ puppetsync func turn_on():
 	var bodies = $Hitbox.get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group("player") and is_network_master():
-			body.info.rpc("modify_health", -spike_damage, position, 1)
+			body.info.rpc("modify_health", -spike_damage, position, 1, "")
 
 puppetsync func turn_off():
 	cur_state = state.OFF
@@ -40,4 +40,4 @@ func _on_Timer_timeout():
 # STUB: better way for player to take damage
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("player") and cur_state == state.ON and is_network_master():
-		body.info.rpc("modify_health", -spike_damage, position, 1)
+		body.info.rpc("modify_health", -spike_damage, position, 1, "")

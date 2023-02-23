@@ -7,6 +7,7 @@ onready var material = get_node("../AnimatedSprite").get_material()
 onready var player = get_parent()
 
 var username: String
+var kills: int = 0
 
 var maxHearts: float = 5
 var currentHearts: float = 3
@@ -35,10 +36,11 @@ func flash():
 	material.set_shader_param("flash_modifer", 0.0)
 	
 func set_username(name: String):
+	username = name
 	$Username.text = name
 
 # NETWORK FUNCTIONS
-remotesync func modify_health(hearts: float, src_pos: Vector2, knockback_mod: float) -> void:
+remotesync func modify_health(hearts: float, src_pos: Vector2, knockback_mod: float, id: String) -> void:
 	if dead or (hearts < 0 and invincible):
 		return
 	# check if damage is being done
@@ -48,12 +50,20 @@ remotesync func modify_health(hearts: float, src_pos: Vector2, knockback_mod: fl
 	currentHearts = clamp(currentHearts + hearts, 0, maxHearts)
 	# check for death
 	if currentHearts == 0:
-		dead = true
-		player.set_physics_process(false)
-		player.rotation_degrees = 90
-		self.visible = false
-		if is_network_master():
-			HUD.activate_death_timer()
+		# check if a player killed
+		if id != "":
+			GameManager.increment_kills(id)
+		start_death()
+
+func start_death():
+	kills = 0
+	GameManager.emit_signal("leaderboard_update")
+	dead = true
+	player.set_physics_process(false)
+	player.rotation_degrees = 90
+	self.visible = false
+	if is_network_master():
+		HUD.activate_death_timer()
 
 remotesync func finish_death():
 	player.position = GameManager.get_valid_spawn()

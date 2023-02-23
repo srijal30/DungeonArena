@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/ui/Solitreo-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 10
+font_data = ExtResource( 2 )
+
+[node name="LeaderboardEntry" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -407.0
+margin_bottom = -275.0
+
+[node name="Container" type="HBoxContainer" parent="."]
+margin_right = 100.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Name" type="Label" parent="Container"]
+margin_right = 48.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Name"
+valign = 1
+clip_text = true
+
+[node name="Kills" type="Label" parent="Container"]
+margin_left = 52.0
+margin_right = 100.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Kills"
+align = 2
+valign = 1
+clip_text = true

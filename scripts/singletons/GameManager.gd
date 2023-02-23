@@ -3,6 +3,8 @@
 
 extends Node2D
 
+signal leaderboard_update
+
 # PLAYER STUFF
 var players: Dictionary = {}
 var PlayerScene = preload("res://scenes/player/Player.tscn")
@@ -10,6 +12,7 @@ var PlayerScene = preload("res://scenes/player/Player.tscn")
 # GAME STUFF
 var TestScene = preload("res://scenes/levels/Test.tscn")
 var currentLevel: Node2D
+
 
 # STUB: sync the level too
 func create_level():
@@ -43,6 +46,13 @@ remotesync func create_player(id: int, username: String):
 	# create the player
 	players[str(id)] = new_player
 	add_child(new_player)
+	emit_signal("leaderboard_update")
+
+func increment_kills(id: String):
+	if id in players:
+		var info = players[id].info
+		info.kills += 1
+	emit_signal("leaderboard_update")
 
 
 func get_valid_spawn():
