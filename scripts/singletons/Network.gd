@@ -13,6 +13,20 @@ func _ready():
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 	get_tree().connect("connected_to_server", self, "_connected_to_server")
 	get_tree().connect("connection_failed", self, "_connection_failed")
+	
+	# will not run process until peer created
+	set_process(false)
+
+func _process(delta):
+	if get_tree().is_network_server():
+		var server = get_tree().network_peer
+		if server.is_listening():
+			server.poll()
+	else:
+		var client = get_tree().network_peer
+		var status = client.get_connection_status()
+		if status == NetworkedMultiplayerPeer.CONNECTION_CONNECTED or status == NetworkedMultiplayerPeer.CONNECTION_CONNECTING:
+			client.poll()
 
 
 # UNIQUE SERVER FUNCTIONALITY
@@ -22,9 +36,11 @@ func _ready():
 
 func create_server() -> void:
 	print("server created")
-	var peer = NetworkedMultiplayerENet.new()
-	peer.create_server(PORT, MAX_PLAYERS)
-	get_tree().network_peer = peer
+	
+	var server = WebSocketServer.new()
+	server.listen(PORT, PoolStringArray(), true)
+	get_tree().network_peer = server
+	set_process(true)
 	
 	# STUB: setup the level
 	GameManager.create_level()
@@ -32,9 +48,12 @@ func create_server() -> void:
 
 func create_client(ip: String, name: String) -> void:
 	print("client created")
-	var peer = NetworkedMultiplayerENet.new()
-	peer.create_client(ip, PORT)
-	get_tree().network_peer = peer
+	
+	var client = WebSocketClient.new()
+	var url = "ws://" + ip + ":" + str(PORT)
+	var error = client.connect_to_url(url, PoolStringArray(), true)
+	get_tree().network_peer = client
+	set_process(true)
 	
 	# WARNING: move create level somewhere else just in case not connected properly
 	# STUB: setup the level (right now not fully synced (spikes for e.g))
