@@ -7,9 +7,12 @@ onready var material = get_node("../AnimatedSprite").get_material()
 onready var player = get_parent()
 
 var username: String
+
 var maxHearts: float = 5
 var currentHearts: float = 3
+
 var invincible: bool = false
+var dead: bool = false
 
 func _ready():
 	if is_network_master():
@@ -35,29 +38,27 @@ func set_username(name: String):
 	$Username.text = name
 
 # NETWORK FUNCTIONS
-remotesync func modify_health(hearts: float, src_pos) -> void:
+remotesync func modify_health(hearts: float, src_pos: Vector2, knockback_mod: float) -> void:
+	if dead or (hearts < 0 and invincible):
+		return
 	# check if damage is being done
 	if hearts < 0:
 		flash()
-		# check if knockback should be applied
-		if src_pos != null:
-			player.knockback(src_pos)	
-	# skip if invincible
-	if hearts < 0 and invincible:
-		return
-	else:
-		currentHearts = clamp(currentHearts + hearts, 0, maxHearts)
+	player.knockback(src_pos, knockback_mod)
+	currentHearts = clamp(currentHearts + hearts, 0, maxHearts)
 	# check for death
 	if currentHearts == 0:
-		# TO DO: create a death function 
-		player.set_process(false)
-		player.visible = false
+		dead = true
+		player.set_physics_process(false)
+		player.rotation_degrees = 90
+		self.visible = false
 		if is_network_master():
 			HUD.activate_death_timer()
 
 remotesync func finish_death():
-	# Set spawning systems later
-	player.position = Vector2(0, 0)
+	player.position = GameManager.get_valid_spawn()
 	currentHearts = maxHearts
-	player.set_process(true)
-	player.visible = true
+	player.set_physics_process(true)
+	player.rotation_degrees = 0
+	self.visible = true
+	dead = false

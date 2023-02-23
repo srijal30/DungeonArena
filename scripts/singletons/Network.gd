@@ -5,6 +5,7 @@ var MAX_PLAYERS : int = 10
 var username: String
 
 func _ready():
+	randomize()
 	# server & client signals
 	get_tree().connect("network_peer_connected", self, "_peer_connected")
 	get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")	

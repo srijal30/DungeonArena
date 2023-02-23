@@ -32,10 +32,10 @@ func remove_player(id: int):
 
 
 remotesync func create_player(id: int, username: String):
-
 	var new_player = PlayerScene.instance()
 	new_player.set_name(str(id))
 	new_player.set_network_master(id)
+	new_player.position = get_valid_spawn()
 	
 	# WARNING: get_node is dangerous
 	new_player.get_node("PlayerInfo").set_username(username)
@@ -43,3 +43,13 @@ remotesync func create_player(id: int, username: String):
 	# create the player
 	players[str(id)] = new_player
 	add_child(new_player)
+
+
+func get_valid_spawn():
+	var space_state = get_world_2d().direct_space_state
+	var random_point = Vector2((randi()%50-25)*16, (randi()%50-25)*16)
+	var result = space_state.intersect_point(random_point)
+	while len(result) != 0:
+		random_point = Vector2(randi()%(50*16)-(25*16), randi()%(50*16)-(25*16))
+		result = space_state.intersect_point(random_point)
+	return random_point

@@ -61,8 +61,8 @@ func dash():
 	
 # STUB: test this
 # not sure if this works
-func knockback(src_pos):
-	velocity = Vector2(src_pos.x-position.x, src_pos.y-position.y).normalized() * -knockback_strength
+func knockback(src_pos, mod):
+	velocity = Vector2(src_pos.x-position.x, src_pos.y-position.y).normalized() * -knockback_strength * mod
 
 func do_animation():
 	# determine orientation

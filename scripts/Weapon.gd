@@ -6,6 +6,7 @@ TO DO:
 extends Node2D
 
 var weapon_damage : float = 1
+var knockback = 1.5
 var attacking: bool = false
 
 onready var parent = get_parent()
@@ -27,8 +28,8 @@ puppetsync func attack():
 	# MAKE THIS MORE GENERAL (NOT JUST FOR PLAYERS
 	var bodies = $Hitbox.get_overlapping_bodies()
 	for body in bodies:
-		if body.is_in_group("player") and is_network_master():
-			body.info.rpc("modify_health", -weapon_damage, position)
+		if body.is_in_group("player") and is_network_master() and body != parent:
+			body.info.rpc("modify_health", -weapon_damage, position, knockback)
 			
 	yield($AnimationPlayer, "animation_finished")
 	attacking = false
@@ -36,4 +37,4 @@ puppetsync func attack():
 # ONLY NETWORK MASTER COMMITS THE DAMAGE	
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("character") and is_network_master() and body != parent and attacking:
-		body.info.rpc("modify_health", -weapon_damage, get_parent().position)
+		body.info.rpc("modify_health", -weapon_damage, get_parent().position, knockback)
