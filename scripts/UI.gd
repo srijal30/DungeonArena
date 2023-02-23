@@ -7,6 +7,13 @@ func _ready():
 	# connect network signals
 	get_tree().connect("server_disconnected", $Lobby, "show")
 	get_tree().connect("connection_failed", $Lobby, "show")
+	
+	# dedicated server
+	if "--server" in OS.get_cmdline_args():
+		print("this is the server")
+		print(IP.get_local_addresses()[3])
+		Network.create_server()
+		$Lobby.hide()
 
 func _on_Host_button_up() -> void:
 	print("this is the server")
