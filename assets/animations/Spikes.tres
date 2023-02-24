@@ -1,7 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=10 format=2]
 
 [sub_resource type="StreamTexture" id=58]
-load_path = "res://.import/dungeon_tiles.png-62b6729de370705253def7f0cad774fc.stex"
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = SubResource( 58 )
