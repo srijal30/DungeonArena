@@ -17,7 +17,7 @@ func _ready():
 	# will not run process until peer created
 	set_process(false)
 
-func _process(delta):
+func _process(_delta):
 	if get_tree().is_network_server():
 		var server = get_tree().network_peer
 		if server.is_listening():
@@ -27,12 +27,6 @@ func _process(delta):
 		var status = client.get_connection_status()
 		if status == NetworkedMultiplayerPeer.CONNECTION_CONNECTED or status == NetworkedMultiplayerPeer.CONNECTION_CONNECTING:
 			client.poll()
-
-
-# UNIQUE SERVER FUNCTIONALITY
-# ...
-# TO DO:
-# ADD A FUNCTION THAT SYNCS ALL CLIENTS WHEN THEY JOIN
 
 func create_server() -> void:
 	print("server created")
@@ -51,7 +45,7 @@ func create_client(ip: String, name: String) -> void:
 	
 	var client = WebSocketClient.new()
 	var url = "ws://" + ip + ":" + str(PORT)
-	var error = client.connect_to_url(url, PoolStringArray(), true)
+	var _error = client.connect_to_url(url, PoolStringArray(), true)
 	get_tree().network_peer = client
 	set_process(true)
 	
@@ -68,6 +62,10 @@ func _peer_connected(id: int) -> void:
 	if not get_tree().is_network_server():
 		var netId = get_tree().get_network_unique_id()
 		GameManager.rpc_id(id, "create_player", netId, username)
+	# if the server, then sync current game state
+	else:
+		print("this is the server")
+		GameManager.sync_peer(id)
 
 func _peer_disconnected(id: int) -> void:
 	# STUB: remove the player

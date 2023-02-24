@@ -1,21 +1,26 @@
-extends Node
+extends Node2D
 
-var HUDScene : PackedScene = preload("res://scenes/HUD.tscn")
+var HUDScene : PackedScene = preload("res://scenes/ui/HUD.tscn")
 var HUD: Node
 
-onready var material = get_node("../AnimatedSprite").get_material()
+onready var sprite_material = get_node("../AnimatedSprite").get_material()
 onready var player = get_parent()
+
+var closest : Node = null
+var highlight : Shader = preload("res://assets/shaders/highlight.tres")
+var highlightMaterial : ShaderMaterial = ShaderMaterial.new()
 
 var username: String
 var kills: int = 0
 
-var maxHearts: float = 5
-var currentHearts: float = 3
+var maxHearts: float = 6
+var currentHearts: float = 6
 
 var invincible: bool = false
 var dead: bool = false
 
 func _ready():
+	highlightMaterial.set_shader(highlight)
 	if is_network_master():
 		HUD = HUDScene.instance()
 		HUD.info = self
@@ -26,14 +31,36 @@ func _process(_delta):
 		$Username.visible = not $Username.visible
 		
 	$HealthBar/Health.rect_size.x = (currentHearts/maxHearts) * 20
+	
+	if is_network_master():
+		check_interact()
 
 # CONTROLLER FUNCTIONS
+func check_interact():
+	if closest:
+		closest.set_material(null)
+	closest = null
+	# find new closest
+	for area in $InteractArea.get_overlapping_areas():
+		if area.is_in_group("interact"):
+			if not closest:
+				closest = area
+			elif position.distance_to(closest.position) > position.distance_to(area.position):
+				closest = area
+	# highlight the new closest
+	if closest:
+		closest.set_material(highlightMaterial)
+	if Input.is_action_just_pressed("interact"):
+		if closest:
+			closest.rpc("interact")
+		else:
+			print("nothing to interact with!")
 
 # can only get called by master
 func flash():
-	material.set_shader_param("flash_modifer", 1.0)
+	sprite_material.set_shader_param("flash_modifer", 1.0)
 	yield(get_tree().create_timer(.1), "timeout")
-	material.set_shader_param("flash_modifer", 0.0)
+	sprite_material.set_shader_param("flash_modifer", 0.0)
 	
 func set_username(name: String):
 	username = name

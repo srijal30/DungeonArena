@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-var entry = preload("res://scenes/LeaderboardEntry.tscn")
+var entry = preload("res://scenes/ui/LeaderboardEntry.tscn")
 
 func add_entry(username: String, kills: int) -> void:
 	var new_entry = entry.instance()

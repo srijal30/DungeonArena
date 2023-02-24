@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scripts/HUD.gd" type="Script" id=1]
-[ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=2]
-[ext_resource path="res://assets/ui/Solitreo-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/items/full_heart.png" type="Texture" id=4]
-[ext_resource path="res://assets/items/no_heart.png" type="Texture" id=5]
-[ext_resource path="res://scenes/Leaderboard.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/ui/Solitreo-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/ui/HUD.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=3]
+[ext_resource path="res://assets/items/no_heart.png" type="Texture" id=4]
+[ext_resource path="res://assets/items/full_heart.png" type="Texture" id=5]
+[ext_resource path="res://scenes/ui/Leaderboard.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -13,15 +13,15 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 3 )
+font_data = ExtResource( 1 )
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="FPSCounter" type="Label" parent="."]
 margin_left = 10.0
 margin_top = 10.0
-theme = ExtResource( 2 )
+theme = ExtResource( 3 )
 custom_fonts/font = SubResource( 1 )
 text = "FPS: "
 
@@ -34,7 +34,7 @@ margin_top = -30.0
 margin_right = 23.0
 margin_bottom = -14.0
 rect_scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 stretch_mode = 2
 
 [node name="Hearts" type="TextureRect" parent="."]
@@ -46,14 +46,14 @@ margin_top = -30.0
 margin_right = 23.0
 margin_bottom = -14.0
 rect_scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 stretch_mode = 2
 
 [node name="DeathTimer" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 2 )
+theme = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="DeathTimer"]
 one_shot = true
@@ -93,9 +93,9 @@ color = Color( 0.952941, 0.0196078, 0.0196078, 1 )
 [node name="Leaderboard" parent="." instance=ExtResource( 6 )]
 anchor_left = 1.0
 anchor_bottom = 0.0
-margin_left = -60.0
-margin_top = 7.0
-margin_right = -5.0
-margin_bottom = 83.0
+margin_left = -94.0
+margin_top = 12.0
+margin_right = -12.0
+margin_bottom = 92.0
 
 [connection signal="timeout" from="DeathTimer/Timer" to="." method="_on_Timer_timeout"]

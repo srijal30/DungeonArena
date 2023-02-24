@@ -22,6 +22,10 @@ puppetsync func point_to(pos):
 	look_at(pos)
 
 puppetsync func attack():
+	var curknock = knockback
+	if not parent.can_dash:
+		curknock *= 2
+	
 	attacking = true
 	$AnimationPlayer.play("slash")
 	
@@ -29,12 +33,15 @@ puppetsync func attack():
 	var bodies = $Hitbox.get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group("player") and is_network_master() and body != parent:
-			body.info.rpc("modify_health", -weapon_damage, position, knockback, parent.name)
+			body.info.rpc("modify_health", -weapon_damage, position, curknock, parent.name)
 			
 	yield($AnimationPlayer, "animation_finished")
 	attacking = false
 
 # ONLY NETWORK MASTER COMMITS THE DAMAGE	
 func _on_Hitbox_body_entered(body):
+	var curknock = knockback
+	if not parent.can_dash:
+		curknock *= 2
 	if body.is_in_group("character") and is_network_master() and body != parent and attacking:
-		body.info.rpc("modify_health", -weapon_damage, get_parent().position, knockback, parent.name)
+		body.info.rpc("modify_health", -weapon_damage, get_parent().position, curknock, parent.name)

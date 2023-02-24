@@ -32,9 +32,9 @@ func update_leaderboard():
 	$Leaderboard.clear_entries()
 	var entries = []
 	for id in GameManager.players:
-		var info = GameManager.players[id].info
-		var username = info.username
-		var kills = info.kills
+		var cur_player = GameManager.players[id]
+		var username = cur_player.info.username
+		var kills = cur_player.info.kills
 		# insertion sort
 		if len(entries) == 0:
 			entries.append([username, kills])

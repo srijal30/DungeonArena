@@ -5,8 +5,9 @@ extends TileMap
 # This way, by referring to TILE_SCENES with a certain ID we will receive this tile's
 # individual scene
 export(Dictionary) var TILE_SCENES := {
-	5: preload("res://scenes/objects/Spikes.tscn"),
-	15:preload("res://scenes/objects/RedFountain.tscn")
+	5: preload("res://scenes/objects/Spike.tscn"),
+	15:preload("res://scenes/objects/RedFountain.tscn"),
+	12:preload("res://scenes/objects/Lever.tscn")
 }
 
 onready var half_cell_size := cell_size * 0.5
@@ -23,7 +24,7 @@ func _replace_tiles_with_scenes(scene_dictionary: Dictionary = TILE_SCENES):
 			var object_scene = scene_dictionary[tile_id]
 			_replace_tile_with_object(tile_pos, object_scene)
 
-func _replace_tile_with_object(tile_pos: Vector2, object_scene: PackedScene, parent: Node = get_parent()):
+func _replace_tile_with_object(tile_pos: Vector2, object_scene: PackedScene, parent: Node = get_parent().get_node("StaticObjects")):
 	# Clear the cell in TileMap
 	if get_cellv(tile_pos) != INVALID_CELL:
 		set_cellv(tile_pos, -1)
