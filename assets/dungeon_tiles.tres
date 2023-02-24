@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/dungeon_walls.png" type="Texture" id=1]
 
 [sub_resource type="StreamTexture" id=58]
-load_path = "res://.import/dungeon_tiles.png-62b6729de370705253def7f0cad774fc.stex"
+load_path = "res://.import/dungeon_tiles.png-3940a1dfd75312a52111ffa63162aa8e.stex"
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 15.3499, 20.699, 0, 20.699 )
